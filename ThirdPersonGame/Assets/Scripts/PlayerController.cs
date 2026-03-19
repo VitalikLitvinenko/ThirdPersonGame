@@ -9,20 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rigidbody;
     private Vector3 _moveDirection;
     private bool _isGrounded;
+    private Transform _cameraTransform;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _cameraTransform = Camera.main.transform;
     }
-
     private void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 cameraForward = Camera.main.transform.forward;
-        Vector3 cameraRight = Camera.main.transform.right;
-
+        Vector3 cameraForward = _cameraTransform.forward;
+        Vector3 cameraRight = _cameraTransform.right;
         cameraForward.y = 0f;
         cameraRight.y = 0f;
 
