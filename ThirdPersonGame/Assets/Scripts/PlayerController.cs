@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed = 5f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private PlayerAnimatorController _animatorController;
 
     private Rigidbody _rigidbody;
     private Vector3 _moveDirection;
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
         _cameraTransform = Camera.main.transform;
     }
+
     private void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -23,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 cameraForward = _cameraTransform.forward;
         Vector3 cameraRight = _cameraTransform.right;
+
         cameraForward.y = 0f;
         cameraRight.y = 0f;
 
@@ -35,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _isGrounded = false;
+            _animatorController.TriggerJump();
         }
     }
 

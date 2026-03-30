@@ -17,8 +17,7 @@ public class CoinCollector : MonoBehaviour
         {
             _coinCount++;
             _coinText.text = $"Монет: {_coinCount}";
-            other.enabled = false;
-            StartCoroutine(coin.CollectAnimation());
+            coin.Collect();
         }
     }
 }

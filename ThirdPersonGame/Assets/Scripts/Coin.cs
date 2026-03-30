@@ -29,11 +29,14 @@ public class Coin : MonoBehaviour
         }
     }
 
-    public IEnumerator CollectAnimation()
+    public void Collect()
     {
-        if (_animationCoroutine != null)
-            StopCoroutine(_animationCoroutine);
+        GetComponent<Collider>().enabled = false;
+        StartCoroutine(CollectAnimation());
+    }
 
+    private IEnumerator CollectAnimation()
+    {
         float duration = 0.5f;
         float elapsed = 0f;
         Vector3 startScale = transform.localScale;
@@ -47,11 +50,5 @@ public class Coin : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (_animationCoroutine != null)
-            StopCoroutine(_animationCoroutine);
     }
 }
